@@ -1,0 +1,52 @@
+ncases = int(input())
+
+store_cases =[0]*ncases
+
+for i in range(ncases):
+    inp = list(map(int,input().split()))
+    store_cases[i] = inp
+
+points = 0
+
+for day_left, nt_points, t_points, fresh_days, break_days in store_cases:
+    if day_left <= fresh_days:
+        print(day_left*nt_points)
+    elif (day_left -fresh_days) <= break_days:
+        points = fresh_days*nt_points + (day_left - fresh_days)*t_points
+        print(points)
+
+    else:
+        points = []
+        points.append(fresh_days*nt_points + (day_left - fresh_days)*t_points)
+        
+        #full day, break , full day , break 
+        point = 0
+        tire = False
+        fday = 0 #counts how many fresh days have been used
+        while day_left > 0:
+            if tire == False:
+                point += nt_points
+                day_left -= 1
+                fday += 1
+                if fday == fresh_days:
+                    #fresh days have been used
+                    tire = True                
+            else:
+                #checks if there is time for break to take place 
+                #if not then it just add tired days
+                if day_left <= break_days:
+                    point += day_left * t_points
+                    break
+
+                day_left -= break_days
+                #no points are added during break days
+                tire = False
+                fday = 0
+       
+        points.append(point)
+
+        # calculating all possibilites and getting the max from possible answers
+        print(max(points))
+
+
+
