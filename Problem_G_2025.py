@@ -55,7 +55,7 @@ for day_left, nt_points, t_points, fresh_days, break_days in store_cases:
         points.append(point)
         
         
-        # calculating all possibilites and getting the max from possible answers
+        #calculating all possibilites and getting the max from possible answers
         print(max(points))
 
 
